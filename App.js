@@ -1,20 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
+import React from "react";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  TextInput,
+} from "react-native";
+import ItemsList from "./src/components/Items/Items";
+import listItem from "./listItem.json";
+import SearchBar from "./src/components/Serchbar/searchbar";
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Text style={styles.patika_title}>PATİKASTORE</Text>
+        <SearchBar />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          keyExtractor={(item) => item.id}
+          data={listItem}
+          renderItem={({ item }) => <ItemsList urunler={item} />}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 130,
+  },
+  patika_title: {
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    color: "purple",
+    fontSize: 35,
+    fontWeight: "bold",
   },
 });
